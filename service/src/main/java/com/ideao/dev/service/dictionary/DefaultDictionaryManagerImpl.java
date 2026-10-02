@@ -1,15 +1,14 @@
 package com.ideao.dev.service.dictionary;
 
-import com.ideao.dev.service.spi.DictionaryProvider;
-
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class GeneralDictionary implements DictionaryProvider {
-    private SortedMap<String, String> map;
+public class DefaultDictionaryManagerImpl implements DictionaryManager {
+    private Dictionary dictionary;
 
-    public GeneralDictionary() {
-        this.map = new TreeMap<>();
+    public DefaultDictionaryManagerImpl() {
+        this.dictionary = new Dictionary();
+        SortedMap<String, String> map = new TreeMap<>();
         map.put(
                 "book",
                 "a set of written or printed pages, usually bound with " +
@@ -17,10 +16,11 @@ public class GeneralDictionary implements DictionaryProvider {
         map.put(
                 "editor",
                 "a person who edits");
+        this.dictionary.setMap(map);
     }
 
     @Override
-    public String getDefinition(String word) {
-        return map.get(word);
+    public Dictionary getDictionary() {
+       return dictionary;
     }
 }

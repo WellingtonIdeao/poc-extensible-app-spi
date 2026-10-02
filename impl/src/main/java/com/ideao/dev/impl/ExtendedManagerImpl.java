@@ -1,15 +1,17 @@
 package com.ideao.dev.impl;
 
-import com.ideao.dev.service.spi.DictionaryProvider;
+import com.ideao.dev.service.dictionary.Dictionary;
+import com.ideao.dev.service.dictionary.DictionaryManager;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class ExtendedDictionary implements DictionaryProvider {
-    private SortedMap<String, String> map;
+public class ExtendedManagerImpl  implements DictionaryManager {
+    private Dictionary dictionary;
 
-    public ExtendedDictionary() {
-        map = new TreeMap<String, String>();
+    public ExtendedManagerImpl() {
+        this.dictionary = new Dictionary();
+        SortedMap<String, String> map = new TreeMap<>();
         map.put(
                 "xml",
                 "a document standard often used in web services, among other " +
@@ -20,10 +22,11 @@ public class ExtendedDictionary implements DictionaryProvider {
                         "and deleting data that attempts to use the common " +
                         "vocabulary of the HTTP protocol; Representational State " +
                         "Transfer");
+        this.dictionary.setMap(map);
     }
 
     @Override
-    public String getDefinition(String word) {
-        return map.get(word);
+    public Dictionary getDictionary() {
+        return dictionary;
     }
 }
